@@ -450,6 +450,13 @@ class FramerScraper:
             r"""import\(\s*(['"`])https://framer\.com/m/(?:phosphor-icons|material-icons)[^'"`]*\1\s*\)""",
             stub_empty, patched
         )
+        # Rewrite icon base-URL strings used to build icon stub paths at runtime.
+        # e.g. xt=`https://framer.com/m/phosphor-icons/` → `/assets/m/phosphor-icons/`
+        patched = patched.replace(
+            "https://framer.com/m/phosphor-icons/", "/assets/m/phosphor-icons/"
+        ).replace(
+            "https://framer.com/m/material-icons/", "/assets/m/material-icons/"
+        )
         # Remove Framer badge redirect URL (used in badge anchor href)
         patched = re.sub(
             r'https://www\.framer\.com/r/badge/[^\s"\'`]*',
