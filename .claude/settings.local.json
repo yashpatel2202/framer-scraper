@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -o '..\\\\{30\\\\}editorbar.\\\\{60\\\\}' \"/Volumes/Data/Current Projects/Tech Projects/portfolio-smit/smit-portfolio-v4/scrap/meetsmeet.framer.website/js/framer.KeuB39o7.mjs\")",
+      "Bash(grep -o '..\\\\{30\\\\}editorbar.\\\\{60\\\\}' \"/Volumes/Data/Current Projects/Tech Projects/portfolio-smit/smit-portfolio-v4/scrap/meetsmeet.framer.website/js/sites/3nzyo1Annd57SuSQXvTsT2/framer.KeuB39o7.mjs\")"
+    ]
+  }
+}
