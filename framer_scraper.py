@@ -817,6 +817,18 @@ class FramerScraper:
             # Editor canvas screenshot placeholder
             patched = patched.replace("screenshot.framer.invalid", "about:blank")
 
+            # Fix protocol-less external URLs used as href values.
+            # Framer sometimes stores bare "domain.com/path" in component props and
+            # relies on its Link component to add https:// at runtime. Since we strip
+            # the live Framer runtime, we must add the protocol ourselves.
+            patched = re.sub(
+                r"""(href:[`'"])([a-zA-Z0-9][a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/[^`'"\\]*)""",
+                lambda m: m.group(0) if m.group(2).startswith(
+                    ("https://", "http://", "/", "#", "data:", "mailto:", "tel:")
+                ) else m.group(1) + "https://" + m.group(2),
+                patched,
+            )
+
             if patched != text:
                 full_path.write_text(patched, encoding="utf-8")
                 patched_count += 1
